@@ -1,0 +1,2 @@
+The reason for the different outputs is the difference/inconsistent between equals methods of Person and PersonWithJob class.
+It is called the instanceof strategy for overriding equals, but it leads to a serious problem, called asymmetry (violates contract for equality).

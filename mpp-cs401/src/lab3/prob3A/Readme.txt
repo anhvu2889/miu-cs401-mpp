@@ -1,0 +1,1 @@
+That does not make sense to use inheritance here. Because Circle "IS NOT A" Cylinder.
