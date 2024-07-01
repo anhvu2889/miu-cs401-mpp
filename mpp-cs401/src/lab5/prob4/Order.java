@@ -5,23 +5,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Order {
-    private LocalDate orderDate;
-    private List<Item> items;
+class Order {
+    private final LocalDate orderDate;
+    private final List<Item> items;
 
     //use a factory method
-    private Order(LocalDate orderDate) {
+    public Order(LocalDate orderDate) {
         this.orderDate = orderDate;
         items = new ArrayList<Item>();
     }
 
-    public void addItem(String name) {
-        items.add(new Item(name));
+    public void addItem(Item item) {
+        items.add(item);
     }
 
     @Override
     public String toString() {
-        return orderDate + ": " +
-                items.toString();
+        return STR."\{orderDate}: \{items.toString()}";
     }
 }

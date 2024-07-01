@@ -1,5 +1,7 @@
 package lab5.prob4;
 
-public class CustomerFactory {
-
+class CustomerFactory {
+    public static Customer createNewCustomer(String name) {
+        return new Customer(name);
+    }
 }

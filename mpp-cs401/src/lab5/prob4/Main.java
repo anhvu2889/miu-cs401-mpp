@@ -4,16 +4,16 @@ import java.time.LocalDate;
 
 class Main {
     public static void main(String[] args) {
-        Customer cust = new Customer("Bob");
-        Order order = Order.newOrder(cust, LocalDate.now());
-        order.addItem("Shirt");
-        order.addItem("Laptop");
+        Customer newCustomer = CustomerFactory.createNewCustomer("Bob");
+        Order newOrder = OrderFactory.createNewOrder(newCustomer, LocalDate.now());
+        OrderFactory.addItem(newOrder, "Shirt");
+        OrderFactory.addItem(newOrder, "Laptop");
 
-        order = Order.newOrder(cust, LocalDate.now());
-        order.addItem("Pants");
-        order.addItem("Knife set");
+        newOrder = OrderFactory.createNewOrder(newCustomer, LocalDate.now());
+        OrderFactory.addItem(newOrder, "Pants");
+        OrderFactory.addItem(newOrder, "Knife set");
 
-        System.out.println(cust.getOrders());
+        System.out.println(newCustomer.getOrders());
     }
 }
 
