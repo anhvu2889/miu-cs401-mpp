@@ -1,7 +1,7 @@
 package midterm.dataaccess;
 
-import midterm.business.Book;
-import midterm.business.LibraryMember;
+import midterm.business.entity.Book;
+import midterm.business.entity.LibraryMember;
 
 import java.util.HashMap;
 

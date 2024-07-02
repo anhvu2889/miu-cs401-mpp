@@ -1,9 +1,9 @@
 package midterm.dataaccess;
 
-import midterm.business.Address;
-import midterm.business.Author;
-import midterm.business.Book;
-import midterm.business.LibraryMember;
+import midterm.business.entity.Address;
+import midterm.business.entity.Author;
+import midterm.business.entity.Book;
+import midterm.business.entity.LibraryMember;
 
 import java.util.ArrayList;
 import java.util.Arrays;

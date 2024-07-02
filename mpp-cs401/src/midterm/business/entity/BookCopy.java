@@ -1,5 +1,6 @@
-package midterm.business;
+package midterm.business.entity;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -7,9 +8,10 @@ import java.io.Serializable;
  */
 final public class BookCopy implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -63976228084869815L;
-    private Book book;
-    private int copyNum;
+    private final Book book;
+    private final int copyNum;
     private boolean isAvailable;
 
     BookCopy(Book book, int copyNum, boolean isAvailable) {

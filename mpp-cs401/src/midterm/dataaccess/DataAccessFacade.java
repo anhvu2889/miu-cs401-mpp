@@ -1,7 +1,7 @@
 package midterm.dataaccess;
 
-import midterm.business.Book;
-import midterm.business.LibraryMember;
+import midterm.business.entity.Book;
+import midterm.business.entity.LibraryMember;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -20,8 +20,7 @@ public class DataAccessFacade implements DataAccess {
         BOOKS, MEMBERS, USERS;
     }
 
-    public static final String OUTPUT_DIR = System.getProperty("user.dir")
-            + "\\src\\midterm\\dataaccess\\storage";
+    public static final String OUTPUT_DIR = STR."\{System.getProperty("user.dir")}/src/midterm/dataaccess/storage";
     public static final String DATE_PATTERN = "MM/dd/yyyy";
 
     //implement: other save operations
