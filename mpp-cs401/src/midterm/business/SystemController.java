@@ -1,5 +1,6 @@
 package midterm.business;
 
+import midterm.business.exception.LoginException;
 import midterm.dataaccess.Auth;
 import midterm.dataaccess.DataAccess;
 import midterm.dataaccess.DataAccessFacade;

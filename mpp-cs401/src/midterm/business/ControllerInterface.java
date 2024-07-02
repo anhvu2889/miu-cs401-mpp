@@ -1,5 +1,7 @@
 package midterm.business;
 
+import midterm.business.exception.LoginException;
+
 import java.util.List;
 
 public interface ControllerInterface {

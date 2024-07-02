@@ -1,5 +1,7 @@
 package midterm.business;
 
+import midterm.business.entity.Book;
+import midterm.business.entity.LibraryMember;
 import midterm.dataaccess.DataAccess;
 import midterm.dataaccess.DataAccessFacade;
 
