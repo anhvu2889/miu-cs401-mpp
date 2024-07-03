@@ -14,7 +14,7 @@ import java.awt.*;
 
 public class LoginWindow extends JPanel implements LibWindow {
     public static final LoginWindow INSTANCE = new LoginWindow();
-    UserControllerImpl ci = new UserControllerImpl();
+    UserControllerImpl userController = new UserControllerImpl();
 
     private boolean isInitialized = false;
 
@@ -91,7 +91,6 @@ public class LoginWindow extends JPanel implements LibWindow {
         lowerHalf.setLayout(new FlowLayout(FlowLayout.LEFT));
         lowerHalf.setVisible(false);
         JButton backButton = new JButton("<= Back to Main");
-        //addBackButtonListener(backButton);
         lowerHalf.add(backButton);
 
     }
@@ -162,7 +161,7 @@ public class LoginWindow extends JPanel implements LibWindow {
     private void addLoginButtonListener(JButton butn) {
         butn.addActionListener(evt -> {
             try {
-                ci.login(username.getText(), password.getText());
+                userController.login(username.getText(), password.getText());
                 MainLibrarySystem.getInstance().navigateToApp();
                 AppPanel.INSTANCE.setRoleMenu();
             } catch (LoginException e) {
