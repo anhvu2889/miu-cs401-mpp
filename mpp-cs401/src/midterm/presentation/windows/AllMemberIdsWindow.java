@@ -11,7 +11,7 @@ import java.awt.*;
 
 public class AllMemberIdsWindow extends JPanel implements LibWindow {
     public static final AllMemberIdsWindow INSTANCE = new AllMemberIdsWindow();
-    UserController ci = new UserControllerImpl();
+    UserController userController = new UserControllerImpl();
     private boolean isInitialized = false;
 
     public JPanel getMainPanel() {

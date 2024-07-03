@@ -13,7 +13,7 @@ import java.awt.*;
 
 public class CheckoutFormWindow extends JPanel implements LibWindow {
     public static final CheckoutFormWindow INSTANCE = new CheckoutFormWindow();
-    UserController ci = new UserControllerImpl();
+    UserController userController = new UserControllerImpl();
     private boolean isInitialized = false;
 
     private JPanel mainPanel;

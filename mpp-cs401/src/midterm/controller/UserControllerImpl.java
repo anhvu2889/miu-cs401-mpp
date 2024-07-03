@@ -26,8 +26,7 @@ public class UserControllerImpl implements UserController {
         if (id.isEmpty() || password.isEmpty()) {
             throw new LoginException("ID or Password must not empty");
         }
-        DataAccess da = new DataAccessFacade();
-        HashMap<String, User> map = da.readUserMap();
+        HashMap<String, User> map = dataAccess.readUserMap();
         if (!map.containsKey(id)) {
             throw new LoginException("ID " + id + " not found");
         }
@@ -49,9 +48,8 @@ public class UserControllerImpl implements UserController {
 
     @Override
     public List<CheckoutRecord> loadCheckoutForm(String memberId, String isbn) throws Exception {
-        DataAccess da = new DataAccessFacade();
-        HashMap<String, LibraryMember> memberMap = da.readMemberMap();
-        HashMap<String, Book> bookMap = da.readBooksMap();
+        HashMap<String, LibraryMember> memberMap = dataAccess.readMemberMap();
+        HashMap<String, Book> bookMap = dataAccess.readBooksMap();
         if (!memberMap.containsKey(memberId)) {
             throw new LibrarySystemException(STR."Member id with \{memberId} is not found");
         }

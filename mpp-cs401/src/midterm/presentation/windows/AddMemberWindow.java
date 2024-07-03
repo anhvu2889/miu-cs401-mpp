@@ -13,7 +13,7 @@ import java.awt.*;
 
 public class AddMemberWindow extends JPanel implements LibWindow {
     public static final AddMemberWindow INSTANCE = new AddMemberWindow();
-    UserController ci = new UserControllerImpl();
+    UserController userController = new UserControllerImpl();
     private boolean isInitialized = false;
 
     private JPanel mainPanel;
@@ -150,7 +150,7 @@ public class AddMemberWindow extends JPanel implements LibWindow {
     private void addLibraryMemberListener(JButton butn) {
         butn.addActionListener(evt -> {
             try {
-                ci.addNewLibraryMember(firstNameTextField.getText(), lastNameField.getText(), memberIdField.getText(), telephoneField.getText(), streetTextField.getText(), cityTextField.getText(), stateTextField.getText(), zipcodeTextField.getText());
+                userController.addNewLibraryMember(firstNameTextField.getText(), lastNameField.getText(), memberIdField.getText(), telephoneField.getText(), streetTextField.getText(), cityTextField.getText(), stateTextField.getText(), zipcodeTextField.getText());
                 JOptionPane.showMessageDialog(AddMemberWindow.this, "New member added successfully");
                 AllMemberIdsWindow.INSTANCE.reloadMember();
                 clearFields();
