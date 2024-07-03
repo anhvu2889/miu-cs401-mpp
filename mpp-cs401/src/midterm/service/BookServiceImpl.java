@@ -11,8 +11,8 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Optional<Book> searchBookByIsbn(String isbn) {
-        DataAccess da = new DataAccessFacade();
-        HashMap<String, Book> bookMap = da.readBooksMap();
+        DataAccess dataAccess = new DataAccessFacade();
+        HashMap<String, Book> bookMap = dataAccess.readBooksMap();
 
         if (bookMap.containsKey(isbn)) {
             return Optional.of(bookMap.get(isbn));
@@ -22,9 +22,9 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book saveNewBookCopy(Book book) {
-        DataAccess da = new DataAccessFacade();
+        DataAccess dataAccess = new DataAccessFacade();
         book.addCopy();
-        da.updateNewBook(book);
+        dataAccess.updateNewBook(book);
         return book;
     }
 }

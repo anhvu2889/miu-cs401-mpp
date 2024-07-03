@@ -16,7 +16,7 @@ import java.util.List;
 
 
 public class LibrarySystem extends JFrame implements LibWindow {
-    UserController ci = new UserControllerImpl();
+    UserController userController = new UserControllerImpl();
     BookController bookController = new BookControllerImpl();
     public final static LibrarySystem INSTANCE = new LibrarySystem();
     JPanel mainPanel;
@@ -142,7 +142,7 @@ public class LibrarySystem extends JFrame implements LibWindow {
             LibrarySystem.hideAllWindows();
             AllBookIdsWindow.INSTANCE.init();
 
-            List<String> ids = ci.getAllMemberIds();
+            List<String> ids = userController.getAllMemberIds();
             Collections.sort(ids);
             StringBuilder sb = new StringBuilder();
             for (String s : ids) {

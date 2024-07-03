@@ -12,7 +12,6 @@ import java.awt.*;
 
 public class AllBookIdsWindow extends JPanel implements LibWindow {
     public static final AllBookIdsWindow INSTANCE = new AllBookIdsWindow();
-    UserController ci = new UserControllerImpl();
     private boolean isInitialized = false;
 
     public JPanel getMainPanel() {
