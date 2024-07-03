@@ -5,28 +5,29 @@ title Sequence Diagram with Checkout function
 autonumber
 
 participant "UserController" as uc
+participant "UserService" as us
 participant "BookService" as bs
-participant "LibraryMember" as lm
 participant "CheckoutRecord" as cr
 participant "DataAccess" as da
 
 [o-> uc++: Checkout Book
 
 note over uc: validate input
-
+uc -> us: getLibraryMembers()
 uc -> bs++: getAvailableBookCopy()
-return BookCopy
+return bookCopy
 
-uc -> lm++: Get Library Member
-return libraryMember
+uc -> uc: getLibraryMember
 
-uc -> cr++: Create new Checkout Record
-deactivate
+uc -> cr++: Create newCheckoutRecord()
+deactivate cr
 
 uc -> da++: Update BookCopy Availability
-deactivate
+deactivate da
 
 uc -> da++: Save New Checkout Record
-deactivate
+return checkoutRecordHashMap
+
+return list checkoutRecord
 
 @enduml

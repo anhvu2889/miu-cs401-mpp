@@ -11,11 +11,14 @@ participant "DataAccess" as da
 [o-> bc++: Add newBookCopy
 note over bc: validate input
 bc -> bs++: searchBookByISBN
-return Book
+return book
 
 note over bc: Check null
 bc -> bs++: saveNewBookCopy
 bs -> da++: updateNewBook
-deactivate
+deactivate da
+return book
+
+return book
 
 @enduml

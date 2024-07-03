@@ -2,6 +2,7 @@ package midterm.service;
 
 import midterm.data.Auth;
 import midterm.data.User;
+import midterm.entity.LibraryMember;
 import midterm.exception.LibrarySystemException;
 import midterm.exception.LoginException;
 
@@ -21,5 +22,6 @@ public interface UserService {
     void validateLoginInput(String id, String password) throws LoginException;
     void authentication(HashMap<String, User> map, String id, String password) throws LoginException;
     Auth authorization(HashMap<String, User> map, String id);
+    HashMap<String, LibraryMember> getLibraryMembers();
 
 }

@@ -45,7 +45,7 @@ public class UserControllerImpl implements UserController {
 
     @Override
     public List<CheckoutRecord> loadCheckoutForm(String memberId, String isbn) throws Exception {
-        HashMap<String, LibraryMember> memberMap = dataAccess.readMemberMap();
+        HashMap<String, LibraryMember> memberMap = userService.getLibraryMembers();
         HashMap<String, Book> bookMap = dataAccess.readBooksMap();
         if (!memberMap.containsKey(memberId)) {
             throw new LibrarySystemException(STR."Member id with \{memberId} is not found");

@@ -80,4 +80,9 @@ public class UserServiceImpl implements UserService {
     public Auth authorization(HashMap<String, User> map, String id) {
         return map.get(id).getAuthorization();
     }
+
+    @Override
+    public HashMap<String, LibraryMember> getLibraryMembers() {
+        return dataAccess.readMemberMap();
+    }
 }
