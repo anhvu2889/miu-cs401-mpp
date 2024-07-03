@@ -42,8 +42,7 @@ public class UserControllerImpl implements UserController {
     @Override
     public List<String> getAllMemberIds() {
         DataAccess da = new DataAccessFacade();
-        List<String> retval = new ArrayList<>();
-        retval.addAll(da.readMemberMap().keySet());
+        List<String> retval = new ArrayList<>(da.readMemberMap().keySet());
         return retval;
     }
 
@@ -54,7 +53,7 @@ public class UserControllerImpl implements UserController {
         HashMap<String, LibraryMember> memberMap = da.readMemberMap();
         HashMap<String, Book> bookMap = da.readBooksMap();
         if (!memberMap.containsKey(memberId)) {
-            throw new LibrarySystemException("Member id with " + memberId + " is not found");
+            throw new LibrarySystemException(STR."Member id with \{memberId} is not found");
         }
         if (!bookMap.containsKey(isbn) || bookMap.get(isbn).getCopies() == null) {
             throw new LibrarySystemException("This book is not available");
@@ -135,7 +134,7 @@ public class UserControllerImpl implements UserController {
             for (BookCopy e : lb.getCopies()) {
                 if (e.getAvailableBookCopies()) bookCopy++;
             }
-            value[3] = !authors.isEmpty() ? authors.toString().substring(0, authors.length() - 2) : "";
+            value[3] = !authors.isEmpty() ? authors.substring(0, authors.length() - 2) : "";
             value[4] = String.valueOf(bookCopy);
             results[i] = value;
             i++;
@@ -158,12 +157,12 @@ public class UserControllerImpl implements UserController {
             throw new LibrarySystemException("All fields must be non-empty!");
         }
 
-        String zipcoderegex = "^\\d{5}";
-        if (!zip.matches(zipcoderegex)) {
+        String zipcodeRegex = "^\\d{5}";
+        if (!zip.matches(zipcodeRegex)) {
             throw new LibrarySystemException("ZipCode is illegal");
         }
-        String telePhoneRegex = "^\\d{3}-\\d{3}-\\d{4}$";
-        if (!telephone.matches(telePhoneRegex)) {
+        String telephoneRegex = "^\\d{3}-\\d{3}-\\d{4}$";
+        if (!telephone.matches(telephoneRegex)) {
             throw new LibrarySystemException("telephone number input is illegal");
         }
         String mIDRegexString = "^\\d{4}";
@@ -180,9 +179,7 @@ public class UserControllerImpl implements UserController {
 
         Address address = new Address(street, city, state, zip);
         LibraryMember member = new LibraryMember(memberId, firstName, lastName, telephone, address);
-
-        DataAccess da = new DataAccessFacade();
-        da.saveNewMember(member);
+        dataAccess.saveNewMember(member);
 
     }
 }

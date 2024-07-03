@@ -19,7 +19,7 @@ public class AddBookCopyWindow extends JPanel implements LibWindow {
 
     private static final long serialVersionUID = 1L;
     public static final AddBookCopyWindow INSTANCE = new AddBookCopyWindow();
-    UserController ci = new UserControllerImpl();
+    UserController userController = new UserControllerImpl();
     BookController bookController = new BookControllerImpl();
     private boolean isInitialized = false;
 
@@ -29,7 +29,7 @@ public class AddBookCopyWindow extends JPanel implements LibWindow {
     private JButton addBookCopyBtn;
     private JTable bookCopyTable;
 
-    private String[] columnNames = {"No", "ISBN", "Title", "Copy Num", "Available"};
+    private final String[] columnNames = {"No", "ISBN", "Title", "Copy Num", "Available"};
 
     //Singleton class
     private AddBookCopyWindow() {
