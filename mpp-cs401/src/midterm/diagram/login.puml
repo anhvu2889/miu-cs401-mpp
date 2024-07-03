@@ -2,20 +2,23 @@
 
 title Sequence Diagram with Login function
 
-autonumber 1 1
+autonumber
 
-actor User
-participant "LoginWindow" as lw
 participant "UserController" as uc
+participant "UserService" as us
 participant "DataAccess" as da
-participant "Database" as db
 
-User o-> lw: Request Login
-lw -> uc: login(userName, password)
-note over uc: validate input
-uc -> da: Authorization
-da -> db: Read user data
-db --> uc: return user data
-lw -> lw: navigate to app
+[o-> uc++: Request Login
+uc -> us++: Validate input
+deactivate
+
+uc -> da++: readUserMap()
+da --> uc--: return Map
+
+uc -> us++: Authentication
+deactivate
+
+uc -> us++: Authorization
+deactivate
 
 @enduml

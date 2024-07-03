@@ -1,10 +1,15 @@
 package midterm.service;
 
+import midterm.data.Auth;
 import midterm.data.DataAccess;
 import midterm.data.DataAccessFacade;
+import midterm.data.User;
 import midterm.entity.Address;
 import midterm.entity.LibraryMember;
 import midterm.exception.LibrarySystemException;
+import midterm.exception.LoginException;
+
+import java.util.HashMap;
 
 public class UserServiceImpl implements UserService {
 
@@ -51,5 +56,28 @@ public class UserServiceImpl implements UserService {
         Address address = new Address(street, city, state, zip);
         LibraryMember member = new LibraryMember(memberId, firstName, lastName, telephone, address);
         dataAccess.saveNewMember(member);
+    }
+
+    @Override
+    public void validateLoginInput(String id, String password) throws LoginException {
+        if (id.isEmpty() || password.isEmpty()) {
+            throw new LoginException("ID or Password must not empty");
+        }
+    }
+
+    @Override
+    public void authentication(HashMap<String, User> map, String id, String password) throws LoginException {
+        if (!map.containsKey(id)) {
+            throw new LoginException("ID " + id + " not found");
+        }
+        String passwordFound = map.get(id).getPassword();
+        if (!passwordFound.equals(password)) {
+            throw new LoginException("Password incorrect");
+        }
+    }
+
+    @Override
+    public Auth authorization(HashMap<String, User> map, String id) {
+        return map.get(id).getAuthorization();
     }
 }
