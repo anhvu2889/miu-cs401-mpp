@@ -8,6 +8,8 @@ import midterm.data.User;
 import midterm.entity.*;
 import midterm.exception.LibrarySystemException;
 import midterm.exception.LoginException;
+import midterm.service.UserService;
+import midterm.service.UserServiceImpl;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -21,6 +23,7 @@ public class UserControllerImpl implements UserController {
     public static Auth currentAuth = null;
 
     private final DataAccess dataAccess = new DataAccessFacade();
+    private final UserService userService = new UserServiceImpl();
 
     public void login(String id, String password) throws LoginException {
         if (id.isEmpty() || password.isEmpty()) {
@@ -66,9 +69,9 @@ public class UserControllerImpl implements UserController {
 
         CheckoutRecordEntry checkoutRecordEntry = new CheckoutRecordEntry(checkoutDate, dueDate, checkoutBookCopy);
         CheckoutRecord checkoutRecord = new CheckoutRecord(libraryMember, checkoutRecordEntry, dateTime);
-        da.updateBookCopyAvailability(isbn, checkoutBookCopy);
+        dataAccess.updateBookCopyAvailability(isbn, checkoutBookCopy);
 
-        HashMap<String, CheckoutRecord> checkoutRecordHashMap = da.saveNewCheckoutRecord(checkoutRecord,
+        HashMap<String, CheckoutRecord> checkoutRecordHashMap = dataAccess.saveNewCheckoutRecord(checkoutRecord,
                 checkoutBookCopy.getCopyNum());
 
         return checkoutRecordHashMap.values().stream().toList();
@@ -145,39 +148,8 @@ public class UserControllerImpl implements UserController {
     public void addNewLibraryMember(String firstName, String lastName, String memberId, String telephone, String street, String city,
                                     String state,
                                     String zip) throws LibrarySystemException {
-        LibraryMember libraryMember = dataAccess.searchMember(memberId);
-        if (libraryMember != null) {
-            throw new LibrarySystemException("Member already exist");
-        }
-
-        if (firstName.trim().isEmpty() || lastName.trim().isEmpty() || memberId.trim().isEmpty() || telephone.trim().isEmpty()
-                || street.trim().isEmpty() || city.trim().isEmpty() || state.trim().isEmpty() || zip.trim().isEmpty()) {
-            throw new LibrarySystemException("All fields must be non-empty!");
-        }
-
-        String zipcodeRegex = "^\\d{5}";
-        if (!zip.matches(zipcodeRegex)) {
-            throw new LibrarySystemException("ZipCode is illegal");
-        }
-        String telephoneRegex = "^\\d{3}-\\d{3}-\\d{4}$";
-        if (!telephone.matches(telephoneRegex)) {
-            throw new LibrarySystemException("telephone number input is illegal");
-        }
-        String mIDRegexString = "^\\d{4}";
-        if (!memberId.matches(mIDRegexString)) {
-            throw new LibrarySystemException("Member ID should be four digits");
-        }
-
-        char[] chs = memberId.toCharArray();
-        for (char ch : chs) {
-            if (ch < '0' || ch > '9') {
-                throw new LibrarySystemException("Member Id must be numeric");
-            }
-        }
-
-        Address address = new Address(street, city, state, zip);
-        LibraryMember member = new LibraryMember(memberId, firstName, lastName, telephone, address);
-        dataAccess.saveNewMember(member);
-
+        userService.validateUserInput(firstName, lastName, memberId, telephone, street, city, state, zip);
+        userService.checkExistingUserById(memberId);
+        userService.saveNewLibraryMember(firstName, lastName, memberId, telephone, street, city, state, zip);
     }
 }

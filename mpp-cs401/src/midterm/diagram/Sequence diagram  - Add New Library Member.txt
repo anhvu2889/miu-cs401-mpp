@@ -1,11 +1,15 @@
 @startuml
 [o-> UserControllerImpl++: addNewLibraryMember
-UserControllerImpl -> DataAccessFacade++: searchMember()
+UserControllerImpl -> UserServiceImpl++: validateUserInput()
+deactivate UserServiceImpl
+UserControllerImpl -> UserServiceImpl++: checkExistingUserById()
+UserServiceImpl -> DataAccessFacade++: searchMember()
 return libraryMember
-note over UserControllerImpl
-validate input
+note over UserServiceImpl
+check existing member
 end note
-UserControllerImpl -> DataAccessFacade++: saveNewMember()
-deactivate DataAccessFacade
+deactivate UserServiceImpl
+UserControllerImpl -> UserServiceImpl++: saveNewLibraryMember()
+deactivate UserServiceImpl
 deactivate UserControllerImpl
 @enduml
