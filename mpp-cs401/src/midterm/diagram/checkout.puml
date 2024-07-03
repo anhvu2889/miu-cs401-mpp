@@ -1,0 +1,36 @@
+@startuml
+
+title Sequence Diagram with Checkout function
+
+autonumber 1 1
+
+actor User
+participant "CheckoutWindow" as cw
+participant "UserController" as uc
+participant "BookService" as bs
+participant "LibraryMember" as lm
+participant "CheckoutRecord" as cr
+participant "DataAccess" as da
+participant "Database" as db
+
+User o-> cw: Request Checkout
+cw -> uc: Checkout Book(memberId, isbn)
+
+note over uc: validate input
+
+uc -> bs: checkAvailableBookCopy(bookMap, isbn)
+bs --> uc: return BookCopy
+
+uc -> lm: Get Library Member
+lm --> uc: return libraryMember
+
+uc -> cr: Create new Checkout Record
+uc -> da: Update BookCopy Availability
+da -> db: Save data to storage
+
+uc -> da: Save New Checkout Record
+da -> db: Save data to storage
+
+cw -> cw: Navigate to checkout
+
+@enduml

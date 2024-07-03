@@ -8,6 +8,8 @@ import midterm.data.User;
 import midterm.entity.*;
 import midterm.exception.LibrarySystemException;
 import midterm.exception.LoginException;
+import midterm.service.BookService;
+import midterm.service.BookServiceImpl;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -60,7 +62,8 @@ public class UserControllerImpl implements UserController {
             throw new LibrarySystemException("This book is not available");
         }
 
-        BookCopy checkoutBookCopy = checkAvailableBookCopy(bookMap, isbn);
+        BookService bookService = new BookServiceImpl();
+        BookCopy checkoutBookCopy = bookService.checkAvailableBookCopy(bookMap, isbn);
 
         LibraryMember libraryMember = memberMap.get(memberId);
         LocalDateTime dateTime = LocalDateTime.now();
@@ -75,16 +78,6 @@ public class UserControllerImpl implements UserController {
                 checkoutBookCopy.getCopyNum());
 
         return checkoutRecordHashMap.values().stream().toList();
-    }
-
-    private BookCopy checkAvailableBookCopy(HashMap<String, Book> bookMap, String isbn) throws LibrarySystemException {
-        BookCopy[] bookCopies = bookMap.get(isbn).getCopies();
-        for (BookCopy bookCopy : bookCopies) {
-            if (bookCopy.getAvailableBookCopies()) {
-                return bookCopy;
-            }
-        }
-        throw new LibrarySystemException("This book is out of copies");
     }
 
     @Override

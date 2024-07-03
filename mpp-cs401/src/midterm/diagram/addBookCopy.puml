@@ -1,0 +1,27 @@
+@startuml
+
+title Sequence Diagram with Add BookCopy function
+
+autonumber 1 1
+
+actor User
+participant "AddBookCopyWindow" as bw
+participant "BookController" as bc
+participant "BookService" as bs
+participant "DataAccess" as da
+participant "Database" as db
+
+User o-> bw: Add new BookCopy request
+bw -> bc: Add newBookCopy(isbn)
+note over bc: validate input
+bc -> bs: Search Book By ISBN
+bs -> da: Get List Book
+da -> db: Get list Book data
+db --> bs: return list Book
+bs -> bs: Check exist
+bs --> bc: return Optional
+bc -> bs: saveNewBookCopy
+bs -> da: updateNewBook
+da -> db: Save Book to Storage
+
+@enduml
