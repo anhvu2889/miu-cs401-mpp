@@ -1,0 +1,33 @@
+@startuml
+
+title Sequence Diagram with Checkout function
+
+autonumber
+
+participant "UserController" as uc
+participant "UserService" as us
+participant "BookService" as bs
+participant "CheckoutRecord" as cr
+participant "DataAccess" as da
+
+[o-> uc++: Checkout Book
+
+note over uc: validate input
+uc -> us: getLibraryMembers()
+uc -> bs++: getAvailableBookCopy()
+return bookCopy
+
+uc -> uc: getLibraryMember
+
+uc -> cr++: Create newCheckoutRecord()
+deactivate cr
+
+uc -> da++: Update BookCopy Availability
+deactivate da
+
+uc -> da++: Save New Checkout Record
+return checkoutRecordHashMap
+
+return list checkoutRecord
+
+@enduml

@@ -26,18 +26,12 @@ public class UserControllerImpl implements UserController {
     private final UserService userService = new UserServiceImpl();
 
     public void login(String id, String password) throws LoginException {
-        if (id.isEmpty() || password.isEmpty()) {
-            throw new LoginException("ID or Password must not empty");
-        }
+        userService.validateLoginInput(id, password);
+
         HashMap<String, User> map = dataAccess.readUserMap();
-        if (!map.containsKey(id)) {
-            throw new LoginException("ID " + id + " not found");
-        }
-        String passwordFound = map.get(id).getPassword();
-        if (!passwordFound.equals(password)) {
-            throw new LoginException("Password incorrect");
-        }
-        currentAuth = map.get(id).getAuthorization();
+        userService.authentication(map, id, password);
+
+        currentAuth = userService.authorization(map, id);
 
     }
 
@@ -51,7 +45,7 @@ public class UserControllerImpl implements UserController {
 
     @Override
     public List<CheckoutRecord> loadCheckoutForm(String memberId, String isbn) throws Exception {
-        HashMap<String, LibraryMember> memberMap = dataAccess.readMemberMap();
+        HashMap<String, LibraryMember> memberMap = userService.getLibraryMembers();
         HashMap<String, Book> bookMap = dataAccess.readBooksMap();
         if (!memberMap.containsKey(memberId)) {
             throw new LibrarySystemException(STR."Member id with \{memberId} is not found");
@@ -60,7 +54,7 @@ public class UserControllerImpl implements UserController {
             throw new LibrarySystemException("This book is not available");
         }
 
-        BookCopy checkoutBookCopy = checkAvailableBookCopy(bookMap, isbn);
+        BookCopy checkoutBookCopy = getAvailableBookCopy(bookMap, isbn);
 
         LibraryMember libraryMember = memberMap.get(memberId);
         LocalDateTime dateTime = LocalDateTime.now();
@@ -77,7 +71,7 @@ public class UserControllerImpl implements UserController {
         return checkoutRecordHashMap.values().stream().toList();
     }
 
-    private BookCopy checkAvailableBookCopy(HashMap<String, Book> bookMap, String isbn) throws LibrarySystemException {
+    private BookCopy getAvailableBookCopy(HashMap<String, Book> bookMap, String isbn) throws LibrarySystemException {
         BookCopy[] bookCopies = bookMap.get(isbn).getCopies();
         for (BookCopy bookCopy : bookCopies) {
             if (bookCopy.getAvailableBookCopies()) {

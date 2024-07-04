@@ -1,0 +1,24 @@
+@startuml
+
+title Sequence Diagram with Add BookCopy function
+
+autonumber
+
+participant "BookController" as bc
+participant "BookService" as bs
+participant "DataAccess" as da
+
+[o-> bc++: Add newBookCopy
+note over bc: validate input
+bc -> bs++: searchBookByISBN
+return book
+
+note over bc: Check null
+bc -> bs++: saveNewBookCopy
+bs -> da++: updateNewBook
+deactivate da
+return book
+
+return book
+
+@enduml
