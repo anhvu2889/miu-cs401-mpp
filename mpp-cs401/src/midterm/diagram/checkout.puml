@@ -4,11 +4,11 @@ title Sequence Diagram with Checkout function
 
 autonumber
 
-participant "UserController" as uc
-participant "UserService" as us
-participant "BookService" as bs
+participant "UserControllerImpl" as uc
+participant "UserServiceImpl" as us
+participant "BookServiceImpl" as bs
 participant "CheckoutRecord" as cr
-participant "DataAccess" as da
+participant "DataAccessFacade" as da
 
 [o-> uc++: Checkout Book
 

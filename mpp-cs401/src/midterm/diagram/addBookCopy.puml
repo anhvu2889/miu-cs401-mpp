@@ -4,19 +4,20 @@ title Sequence Diagram with Add BookCopy function
 
 autonumber
 
-participant "BookController" as bc
-participant "BookService" as bs
-participant "DataAccess" as da
+participant "BookControllerImpl" as bc
+participant "BookServiceIml" as bs
+participant "DataAccessFacade" as da
 
-[o-> bc++: Add newBookCopy
+[o-> bc++: addNewBookCopy()
 note over bc: validate input
-bc -> bs++: searchBookByISBN
+bc -> bs++: searchBookByIsbn()
 return book
 
-note over bc: Check null
-bc -> bs++: saveNewBookCopy
-bs -> da++: updateNewBook
-deactivate da
+note over bc: Check existing book
+bc -> bs++: saveNewBookCopy()
+bs -> da++: updateBook()
+return book
+
 return book
 
 return book

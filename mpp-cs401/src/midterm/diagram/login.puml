@@ -4,9 +4,9 @@ title Sequence Diagram with Login function
 
 autonumber
 
-participant "UserController" as uc
-participant "UserService" as us
-participant "DataAccess" as da
+participant "UserControllerImpl" as uc
+participant "UserServiceImpl" as us
+participant "DataAccessFacade" as da
 
 [o-> uc++: Request Login
 uc -> us++: Validate input
