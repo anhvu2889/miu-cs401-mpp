@@ -1,33 +1,22 @@
-# Computer Professionals Program at MIU (MPP - Modern Programming Practices)
+# MIU - MPP (Modern Programming Practices) Course Assignments
+
+This repository contains assignments and coursework for the **MPP (Modern Programming Practices)** course, part of the graduate Computer Science program at **Maharishi International University (MIU)**.
+
+---
 
 ## Course Overview
-The **MPP (Modern Programming Practices)** course presents the fundamental principles of object-oriented programming. Students will learn how to write reusable and better-maintained software and integrate this knowledge with laboratory assignments and projects.
+The **MPP** course presents the fundamental principles of object-oriented programming. Students will learn how to write reusable and better-maintained software and integrate this knowledge with laboratory assignments and projects.
 
 ---
 
 ## Topics Covered
-The course covers the following topics:
+The course focuses on the following topics:
 
-1. **Object-Oriented Programming Principles**  
-   - Encapsulation  
-   - Inheritance  
-   - Polymorphism  
-
-2. **Design Principles**  
-   - Reusability and Maintainability  
-   - Design Patterns  
-
-3. **UML Class Diagrams**  
-   - Modeling Structures and Relationships  
-   - Sequence and Activity Diagrams  
-
-4. **Software Development Practices**  
-   - Code Organization and Modularity  
-   - Version Control and Collaboration Tools  
-
-5. **Hands-On Projects**  
-   - Practical Assignments for Reinforcement  
-   - Group Projects for Real-World Application  
+- Object-Oriented Programming Principles (Encapsulation, Inheritance, Polymorphism)
+- Design Principles (Reusability, Maintainability, and Design Patterns)
+- UML Class Diagrams (Modeling Structures, Relationships, Sequence, and Activity Diagrams)
+- Software Development Practices (Code Organization, Modularity, Version Control, and Collaboration Tools)
+- Hands-On Projects (Practical Assignments and Group Projects for Real-World Applications)
 
 ---
 
@@ -62,9 +51,3 @@ Contributions are welcome! Follow these steps to contribute:
 2. Create a new branch for your feature or bug fix.
 3. Commit your changes with a descriptive message.
 4. Submit a pull request for review.
-
----
-
-## Contact
-For questions or suggestions, please reach out to the course instructor or create an issue in the repository.
-
